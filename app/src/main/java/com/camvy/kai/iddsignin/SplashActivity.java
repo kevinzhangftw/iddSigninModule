@@ -8,9 +8,9 @@ import android.net.ConnectivityManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Toast;
+
+import com.camvy.kai.iddsignin.Networking.PoxyServer;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -36,18 +36,19 @@ public class SplashActivity extends AppCompatActivity {
             //direct to signup activity
         }
 
-        PoxyServer.authenticate(token) {
-            Intent pushIntent;
-            if (success) {
-                //success -> make intent for parkList activity
-                Activity listAct = ParkListActivity();
-                pushIntent = Intent(push, parkList activity)
-            } else {
-                //fail -> make intent for login/signup acitivity...
-
-            }
-            //finally, startActivity(intent)...
-        }
+        PoxyServer.authenticate(token);
+//        PoxyServer.authenticate(token) {
+//            Intent pushIntent;
+//            if (success) {
+//                //success -> make intent for parkList activity
+//                Activity listAct = ParkListActivity();
+//                pushIntent = Intent(push, parkList activity)
+//            } else {
+//                //fail -> make intent for login/signup acitivity...
+//
+//            }
+//            //finally, startActivity(intent)...
+//        }
     }
 
     private boolean isNetworkConnected() {
