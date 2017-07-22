@@ -12,18 +12,18 @@ import android.preference.PreferenceManager;
  */
 
 public class UserState {
-    private static String tokenKey = "UserStateToken";
+    private static String tokenKey = "UserStateSampleTokenKey";
 
     //returns a string if saved, null otherwise.
-    public static String getToken(Context ctx){
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(ctx);
+    public static String getToken(Context context){
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
         return pref.getString(UserState.tokenKey, null);
     }
 
-    public static void setToken(String token, Context ctx){
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(ctx);
+    public static void setToken(String tokenString, Context context){
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor e = pref.edit();
-        e.putString(tokenKey, token);
+        e.putString(tokenKey, tokenString);
         e.commit();
     }
 }

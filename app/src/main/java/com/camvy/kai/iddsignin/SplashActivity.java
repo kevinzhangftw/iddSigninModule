@@ -17,10 +17,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        // remove notifiation bar
         setContentView(R.layout.activity_splash);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         this.findViewById(android.R.id.content).setBackgroundColor(Color.BLACK);
 
         authenticateToken();
@@ -31,6 +28,7 @@ public class SplashActivity extends AppCompatActivity {
         if (!isNetworkConnected()) {
             Toast.makeText(this, "No internet connection", Toast.LENGTH_LONG).show();
         }
+
         String token = UserState.getToken(this);
         if (token == null) {
             //TODO: show welcome message...
@@ -38,18 +36,18 @@ public class SplashActivity extends AppCompatActivity {
             //direct to signup activity
         }
 
-//        PoxyServer.authenticate(token) {
-//            Intent pushIntent;
-//            if (success) {
-//                //success -> make intent for parkList activity
-//                Activity listAct = ParkListActivity();
-//                pushIntent = Intent(push, parkList activity)
-//            } else {
-//                //fail -> make intent for login/signup acitivity...
-//
-//            }
-//            //finally, startActivity(intent)...
-//        }
+        PoxyServer.authenticate(token) {
+            Intent pushIntent;
+            if (success) {
+                //success -> make intent for parkList activity
+                Activity listAct = ParkListActivity();
+                pushIntent = Intent(push, parkList activity)
+            } else {
+                //fail -> make intent for login/signup acitivity...
+
+            }
+            //finally, startActivity(intent)...
+        }
     }
 
     private boolean isNetworkConnected() {
