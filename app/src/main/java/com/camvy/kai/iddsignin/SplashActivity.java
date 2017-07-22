@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.camvy.kai.iddsignin.Networking.Badge;
 import com.camvy.kai.iddsignin.Networking.PoxyServer;
 
 public class SplashActivity extends AppCompatActivity {
@@ -29,15 +30,20 @@ public class SplashActivity extends AppCompatActivity {
             Toast.makeText(this, "No internet connection", Toast.LENGTH_LONG).show();
         }
 
-        String token = UserState.getToken(this);
-        if (token == null) {
+        //DEBUG
+//        Badge newbadge = new Badge(123, "samplesesstoken");
+//        UserState.setBadge(newbadge, this);
+
+        Badge userBadge = UserState.getBadge(this);
+        if (userBadge == null) {
             //TODO: show welcome message...
             Log.v("user state", "token is null");
             //direct to signup activity
         }
+//        Log.v("user state", userBadge.getSession_token());
 
-        PoxyServer.authenticate(token);
-//        PoxyServer.authenticate(token) {
+
+//        PoxyServer.authenticate(userBadge) {
 //            Intent pushIntent;
 //            if (success) {
 //                //success -> make intent for parkList activity

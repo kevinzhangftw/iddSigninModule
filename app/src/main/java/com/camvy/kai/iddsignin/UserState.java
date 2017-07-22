@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.camvy.kai.iddsignin.Networking.Badge;
+
 /**
  * Created by kai on 2017-07-16.
  * Stores user memory, token, user id, park, a
@@ -12,18 +14,23 @@ import android.preference.PreferenceManager;
  */
 
 public class UserState {
-    private static String tokenKey = "UserStateSampleTokenKey";
+    private static Badge userBadge;
 
-    //returns a string if saved, null otherwise.
-    public static String getToken(Context context){
+    public static Badge getBadge(Context context){
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
-        return pref.getString(UserState.tokenKey, null);
+
+        if (pref.getInt("user_id", 0) != 0){
+            userBadge = new Badge(pref.getInt("user_id", 0), pref.getString("session_token", null));
+        }
+
+        return userBadge;
     }
 
-    public static void setToken(String tokenString, Context context){
+    public static void setBadge(Badge badgeTobeSaved, Context context){
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor e = pref.edit();
-        e.putString(tokenKey, tokenString);
+        e.putInt("user_id", badgeTobeSaved.getUser_id());
+        e.putString("session_token", badgeTobeSaved.getSession_token());
         e.commit();
     }
 }
