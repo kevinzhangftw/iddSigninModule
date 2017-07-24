@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.camvy.kai.iddsignin.Networking.AuthCallback;
 import com.camvy.kai.iddsignin.Networking.Badge;
 import com.camvy.kai.iddsignin.Networking.PoxyServer;
 
@@ -42,7 +43,19 @@ public class SplashActivity extends AppCompatActivity {
         }
 //        Log.v("user state", userBadge.getSession_token());
 
-
+        PoxyServer.authenticate(userBadge, new AuthCallback() {
+            @Override
+            public void completion(Object o) {
+                if (success){
+                    Intent parklistIntent = new Intent(this, ParkListActivity.class);
+                    startActivity(parklistIntent);
+                }else{
+                    Intent signinIntent = new Intent(this, SigninActivity.class);
+                    startActivity(signinIntent);
+                }
+            }
+        });
+        
 //        PoxyServer.authenticate(userBadge) {
 //            Intent pushIntent;
 //            if (success) {
