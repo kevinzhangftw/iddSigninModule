@@ -45,17 +45,17 @@ public class SplashActivity extends AppCompatActivity {
 
         PoxyServer.authenticate(userBadge, new AuthCallback() {
             @Override
-            public void completion(Object o) {
-                if (success){
-                    Intent parklistIntent = new Intent(this, ParkListActivity.class);
+            public void completion(boolean bool) {
+                if (bool){
+                    Intent parklistIntent = new Intent(getBaseContext(), ParkListActivity.class);
                     startActivity(parklistIntent);
-                }else{
-                    Intent signinIntent = new Intent(this, SigninActivity.class);
+                }else {
+                    Intent signinIntent = new Intent(getBaseContext(), SigninActivity.class);
                     startActivity(signinIntent);
                 }
             }
         });
-        
+
 //        PoxyServer.authenticate(userBadge) {
 //            Intent pushIntent;
 //            if (success) {
