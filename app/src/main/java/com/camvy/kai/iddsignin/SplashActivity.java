@@ -32,7 +32,7 @@ public class SplashActivity extends AppCompatActivity {
         }
 
         //DEBUG
-//        Badge newbadge = new Badge(123, "samplesesstoken");
+//        Badge newbadge = new Badge(1, "ASDASD");
 //        UserState.setBadge(newbadge, this);
 
         Badge userBadge = UserState.getBadge(this);
@@ -40,6 +40,8 @@ public class SplashActivity extends AppCompatActivity {
             //TODO: show welcome message...
             Log.v("user state", "token is null");
             //direct to signup activity
+            Intent signinIntent = new Intent(getBaseContext(), SigninActivity.class);
+            startActivity(signinIntent);
         }
 //        Log.v("user state", userBadge.getSession_token());
 
@@ -56,18 +58,6 @@ public class SplashActivity extends AppCompatActivity {
             }
         });
 
-//        PoxyServer.authenticate(userBadge) {
-//            Intent pushIntent;
-//            if (success) {
-//                //success -> make intent for parkList activity
-//                Activity listAct = ParkListActivity();
-//                pushIntent = Intent(push, parkList activity)
-//            } else {
-//                //fail -> make intent for login/signup acitivity...
-//
-//            }
-//            //finally, startActivity(intent)...
-//        }
     }
 
     private boolean isNetworkConnected() {

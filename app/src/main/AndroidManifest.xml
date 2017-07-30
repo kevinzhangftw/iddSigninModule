@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".SplashActivity" />
-        <activity android:name=".ParkList" />
+        <activity android:name=".ParkListActivity" />
         <activity android:name=".SigninActivity"></activity>
     </application>
 

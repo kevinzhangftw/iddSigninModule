@@ -15,6 +15,13 @@ public interface PoxyAPI {
     @POST("/authenticate")
     Call<Badge> authenticate(@Body Badge userBadge);
 
+    @Headers("Accept: application/json")
+    @POST("/users")
+    Call<Cred> register(@Body Cred userCred);
+
+    @Headers("Accept: application/json")
+    @POST("/login")
+    Call<LoginCred> login(@Body LoginCred userLoginCred);
 
 
 }
