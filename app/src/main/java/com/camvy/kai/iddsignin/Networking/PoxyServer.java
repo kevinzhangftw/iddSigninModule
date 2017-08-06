@@ -49,11 +49,11 @@ public class PoxyServer {
     public static void register(Cred userCred, final AuthCallback authCallback){
         PoxyAPI poxyAPI = getRetrofitConnection().create(PoxyAPI.class);
         Call<Cred> call = poxyAPI.register(userCred);
-
         call.enqueue(new Callback<Cred>() {
             @Override
             public void onResponse(Call<Cred> call, Response<Cred> response) {
                 if (response.isSuccessful()){
+                    //TODO Save userid and session token
                     authCallback.completion(true);
                     Log.d("Response Success", new Gson().toJson(response.body()));
                 }else{
@@ -77,6 +77,7 @@ public class PoxyServer {
             @Override
             public void onResponse(Call<LoginCred> call, Response<LoginCred> response) {
                 if (response.isSuccessful()){
+                    //TODO Save userid and session token
                     authCallback.completion(true);
                     Log.d("Response Success", new Gson().toJson(response.body()));
                 }else{
