@@ -6,9 +6,13 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.camvy.kai.iddsignin.Networking.AuthCallback;
+import com.camvy.kai.iddsignin.Networking.Badge;
+import com.camvy.kai.iddsignin.Networking.BadgeCallback;
 import com.camvy.kai.iddsignin.Networking.Cred;
 import com.camvy.kai.iddsignin.Networking.LoginCred;
 import com.camvy.kai.iddsignin.Networking.PoxyServer;
+
+import junit.framework.Assert;
 
 public class SigninActivity extends AppCompatActivity {
 
@@ -35,10 +39,14 @@ public class SigninActivity extends AppCompatActivity {
 
         //DEBUG login
         LoginCred fakelogin = new LoginCred("sam@uncle.com", "12345678");
-        PoxyServer.login(fakelogin, new AuthCallback() {
+        PoxyServer.login(fakelogin, new BadgeCallback() {
             @Override
-            public void completion(boolean success) {
+            public void completion(boolean success, Badge badge) {
                 if (success){
+                    UserState.setBadge(badge, getBaseContext());
+                    Assert.assertEquals(badge.getSession_token(), UserState.getBadge(getBaseContext()).getSession_token());
+
+
                     Toast.makeText(getBaseContext(), "You are logged in! You can use the app", Toast.LENGTH_LONG).show();
                     Intent parklistIntent = new Intent(getBaseContext(), ParkListActivity.class);
                     startActivity(parklistIntent);
@@ -47,7 +55,11 @@ public class SigninActivity extends AppCompatActivity {
                     Toast.makeText(getBaseContext(), "Login failed, please try again", Toast.LENGTH_LONG).show();
                 }
             }
+
         });
 
+
     }
+
+
 }

@@ -7,15 +7,15 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class Badge {
-    @SerializedName("user_id") private int user_id;
+    @SerializedName("user_id") private float user_id;
     @SerializedName("session_token") private String session_token;
 
-    public Badge(int user_id, String session_token) {
+    public Badge(float user_id, String session_token) {
         this.user_id = user_id;
         this.session_token = session_token;
     }
 
-    public int getUser_id() {
+    public float getUser_id() {
         return user_id;
     }
     public String getSession_token() {

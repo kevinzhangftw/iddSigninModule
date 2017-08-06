@@ -17,11 +17,12 @@ public interface PoxyAPI {
 
     @Headers("Accept: application/json")
     @POST("/users")
-    Call<Cred> register(@Body Cred userCred);
+    Call<Object> register(@Body Cred userCred);
+//    Call<Cred> register(@Body Cred userCred);
 
     @Headers("Accept: application/json")
     @POST("/login")
-    Call<LoginCred> login(@Body LoginCred userLoginCred);
+    Call<Object> login(@Body LoginCred userLoginCred);
 
 
 }

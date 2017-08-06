@@ -29,7 +29,7 @@ public class UserState {
     public static void setBadge(Badge badgeTobeSaved, Context context){
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor e = pref.edit();
-        e.putInt("user_id", badgeTobeSaved.getUser_id());
+        e.putInt("user_id", (int)badgeTobeSaved.getUser_id());
         e.putString("session_token", badgeTobeSaved.getSession_token());
         e.commit();
     }
