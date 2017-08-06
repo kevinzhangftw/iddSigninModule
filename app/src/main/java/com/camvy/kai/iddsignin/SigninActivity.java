@@ -20,45 +20,41 @@ public class SigninActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
+        //TODO: make GUI for register/login...
+        registerWithServer(new Cred("lam@uncle.com", "12345678", "12345678"));
+        logInWithServer(new LoginCred("lam@uncle.com", "12345678"));
+    }
 
-        //DEBUG
-//        Cred fakeCred = new Cred("sam@uncle.com", "12345678", "12345678");
-//        PoxyServer.register(fakeCred, new AuthCallback() {
-//            @Override
-//            public void completion(boolean success) {
-//                if (success){
-//                    Toast.makeText(getBaseContext(), "Sign up Sucess! You can use the app", Toast.LENGTH_LONG).show();
-//                    Intent parklistIntent = new Intent(getBaseContext(), ParkListActivity.class);
-//                    startActivity(parklistIntent);
-//                }else {
-//                    //Display Why user cannot signup
-//                    Toast.makeText(getBaseContext(), "Sign up failed, please try again", Toast.LENGTH_LONG).show();
-//                }
-//            }
-//        });
-
-        //DEBUG login
-        LoginCred fakelogin = new LoginCred("sam@uncle.com", "12345678");
-        PoxyServer.login(fakelogin, new BadgeCallback() {
+    private void logInWithServer(LoginCred cred) {
+        PoxyServer.login(cred, new BadgeCallback() {
             @Override
             public void completion(boolean success, Badge badge) {
-                if (success){
-                    UserState.setBadge(badge, getBaseContext());
-                    Assert.assertEquals(badge.getSession_token(), UserState.getBadge(getBaseContext()).getSession_token());
-
-
-                    Toast.makeText(getBaseContext(), "You are logged in! You can use the app", Toast.LENGTH_LONG).show();
-                    Intent parklistIntent = new Intent(getBaseContext(), ParkListActivity.class);
-                    startActivity(parklistIntent);
-                }else{
-                    //Display Why user cannot signup
-                    Toast.makeText(getBaseContext(), "Login failed, please try again", Toast.LENGTH_LONG).show();
+                if (!success) {
+                    Toast.makeText(getBaseContext(),
+                            "Login failed, please try again",
+                            Toast.LENGTH_LONG).show(); return;
                 }
+                UserState.setBadge(badge, getBaseContext());
+                Intent parklistIntent = new Intent(getBaseContext(), ParkListActivity.class);
+                startActivity(parklistIntent);
             }
-
         });
+    }
 
-
+    private void registerWithServer(Cred cred) {
+        PoxyServer.register(cred, new BadgeCallback() {
+            @Override
+            public void completion(boolean success, Badge badge) {
+                if (!success) {
+                    Toast.makeText(getBaseContext(),
+                            "Sign up failed, please try again",
+                            Toast.LENGTH_LONG).show(); return;
+                }
+                UserState.setBadge(badge, getBaseContext());
+                Intent parklistIntent = new Intent(getBaseContext(), ParkListActivity.class);
+                startActivity(parklistIntent);
+            }
+        });
     }
 
 
