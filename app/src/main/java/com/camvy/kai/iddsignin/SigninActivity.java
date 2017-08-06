@@ -18,20 +18,20 @@ public class SigninActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signin);
 
         //DEBUG
-        Cred fakeCred = new Cred("sam@uncle.com", "12345678", "12345678");
-        PoxyServer.register(fakeCred, new AuthCallback() {
-            @Override
-            public void completion(boolean success) {
-                if (success){
-                    Toast.makeText(getBaseContext(), "Sign up Sucess! You can use the app", Toast.LENGTH_LONG).show();
-                    Intent parklistIntent = new Intent(getBaseContext(), ParkListActivity.class);
-                    startActivity(parklistIntent);
-                }else {
-                    //Display Why user cannot signup
-                    Toast.makeText(getBaseContext(), "Sign up failed, please try again", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+//        Cred fakeCred = new Cred("sam@uncle.com", "12345678", "12345678");
+//        PoxyServer.register(fakeCred, new AuthCallback() {
+//            @Override
+//            public void completion(boolean success) {
+//                if (success){
+//                    Toast.makeText(getBaseContext(), "Sign up Sucess! You can use the app", Toast.LENGTH_LONG).show();
+//                    Intent parklistIntent = new Intent(getBaseContext(), ParkListActivity.class);
+//                    startActivity(parklistIntent);
+//                }else {
+//                    //Display Why user cannot signup
+//                    Toast.makeText(getBaseContext(), "Sign up failed, please try again", Toast.LENGTH_LONG).show();
+//                }
+//            }
+//        });
 
         //DEBUG login
         LoginCred fakelogin = new LoginCred("sam@uncle.com", "12345678");
