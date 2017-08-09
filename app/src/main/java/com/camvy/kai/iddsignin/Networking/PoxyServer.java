@@ -30,10 +30,10 @@ public class PoxyServer {
 
     public static void authenticate(Badge userbadge, final AuthCallback authCallBack){
         PoxyAPI poxyAPI = getRetrofitConnection().create(PoxyAPI.class);
-        Call<Badge> call = poxyAPI.authenticate(userbadge);
-        call.enqueue(new Callback<Badge>() {
+        Call<Badge> request = poxyAPI.authenticate(userbadge);
+        request.enqueue(new Callback<Badge>() {
             @Override
-            public void onResponse(Call<Badge> call, Response<Badge> response) {
+            public void onResponse(Call<Badge> request, Response<Badge> response) {
                 if (response.isSuccessful()){
                     authCallBack.completion(true);
                 } else {
@@ -42,7 +42,7 @@ public class PoxyServer {
                 }
             }
             @Override
-            public void onFailure(Call<Badge> call, Throwable t) {
+            public void onFailure(Call<Badge> request, Throwable t) {
                 authCallBack.completion(false);
                 Log.d("Response Err Code", "PoxyServer authenticate onFailure...");
             }
@@ -51,7 +51,6 @@ public class PoxyServer {
 
     public static void register(Cred userCred, final BadgeCallback badgeCallback){
         PoxyAPI poxyAPI = getRetrofitConnection().create(PoxyAPI.class);
-
         Call<Object> call = poxyAPI.register(userCred);
         call.enqueue(new Callback<Object>() {
             @Override
@@ -64,7 +63,6 @@ public class PoxyServer {
                     Log.d("Response Err Code",new Gson().toJson(response));
                 }
             }
-
             @Override
             public void onFailure(Call<Object> call, Throwable t) {
                 badgeCallback.completion(false, null);
@@ -76,6 +74,7 @@ public class PoxyServer {
     private static Badge makeBadge(Response<Object> response) {
         Assert.assertTrue(((LinkedTreeMap) response.body()).containsKey("user_id"));
         Assert.assertTrue(((LinkedTreeMap) response.body()).containsKey("session_token"));
+
         LinkedTreeMap body = (LinkedTreeMap) response.body();
         float user_id = ((Double) body.get("user_id")).floatValue();
         String session_token = (String) body.get("session_token");

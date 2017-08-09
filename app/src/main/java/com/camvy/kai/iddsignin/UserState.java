@@ -18,7 +18,6 @@ public class UserState {
 
     public static Badge getBadge(Context context){
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
-
         if (pref.getInt("user_id", 0) != 0){
             userBadge = new Badge(pref.getInt("user_id", 0), pref.getString("session_token", null));
         }

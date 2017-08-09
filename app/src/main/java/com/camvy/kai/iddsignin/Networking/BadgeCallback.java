@@ -5,6 +5,5 @@ package com.camvy.kai.iddsignin.Networking;
  */
 
 public interface BadgeCallback {
-
     void completion(boolean success, Badge badge);
 }

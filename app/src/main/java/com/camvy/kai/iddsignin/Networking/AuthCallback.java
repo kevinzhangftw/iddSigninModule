@@ -5,7 +5,5 @@ package com.camvy.kai.iddsignin.Networking;
  */
 
 public interface AuthCallback {
-
     void completion(boolean success);
-
 }

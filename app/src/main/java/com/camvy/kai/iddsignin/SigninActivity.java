@@ -35,10 +35,14 @@ public class SigninActivity extends AppCompatActivity {
                             Toast.LENGTH_LONG).show(); return;
                 }
                 UserState.setBadge(badge, getBaseContext());
-                Intent parklistIntent = new Intent(getBaseContext(), ParkListActivity.class);
-                startActivity(parklistIntent);
+                beginAppEntry();
             }
         });
+    }
+
+    private void beginAppEntry() {
+        Intent parklistIntent = new Intent(getBaseContext(), ParkListActivity.class);
+        startActivity(parklistIntent);
     }
 
     private void registerWithServer(Cred cred) {
@@ -51,8 +55,7 @@ public class SigninActivity extends AppCompatActivity {
                             Toast.LENGTH_LONG).show(); return;
                 }
                 UserState.setBadge(badge, getBaseContext());
-                Intent parklistIntent = new Intent(getBaseContext(), ParkListActivity.class);
-                startActivity(parklistIntent);
+                beginAppEntry();
             }
         });
     }
